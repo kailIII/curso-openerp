@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<!-- Evaluacion Form View -->
+
+		<record model="ir.ui.view" id="view_profesor_form">
+			<field name="name">view.profesor.form</field>
+			<field name="model">curso.profesor</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Profesor">
+					<field name="name" />
+					<field name="code" />
+					<field name="edad" />
+					<newline/>
+					<notebook colspan="4">
+						<page string="Materias">
+							<separator string="Materias" colspan="4"/>
+							<field name="materia_ids" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="view_profesor_tree">
+			<field name="name">view.profesor.tree</field>
+			<field name="model">curso.profesor</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Profesor">
+					<field name="name" />
+					<field name="code" />
+					<field name="edad" />
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_curso_profesor" model="ir.actions.act_window">
+			<field name="name">Admin. Profesor</field>
+			<field name="res_model">curso.profesor</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+
+
+
+
+	</data>
+</openerp>

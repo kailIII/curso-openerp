@@ -1,0 +1,20 @@
+'''
+Created on 03/05/2013
+
+@author: miltonlab
+'''
+from osv import osv, fields
+class curso_materia(osv.osv):
+    _name = 'curso.materia'
+    _columns = {
+          'name':fields.char('nombre', size=64),
+          #tiene que ser name
+          'descripcion':fields.text('Descripcion'),
+          'horas':fields.integer('Horas'),
+          'creditos':fields.float('Creditos', digits=(2,1)),
+          #atributo name de la clase del modelo One
+          'profesor_id':fields.many2one('curso.profesor','Profesor'),
+          
+   }
+
+curso_materia()

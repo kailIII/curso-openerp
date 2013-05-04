@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp>
+    <data>
+    
+    <menuitem id = "curso_ejemplo_menu" web_icon="images/ejemplo.jpg" web_icon_hover="images/ejemplo.jpg" name="CURSO WORKFLOW"/>
+
+	<menuitem id="sub_menu" name="Curso" parent="curso_ejemplo_menu" sequence="1" groups="user_workflow"/>
+	<menuitem id="sub_menu2" name="Formulario Datos Curso" parent="sub_menu" action = "action_ejemplo_curso"/>
+	
+    </data>
+</openerp>

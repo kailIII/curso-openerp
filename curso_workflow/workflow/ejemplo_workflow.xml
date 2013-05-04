@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    
+    <!-- 
+    ===============
+    EJEMPLO WORKLOW 
+    ===============
+    -->
+    
+    
+    <!-- Inicio del Flujo -->
+    
+    <record id="example_wkf" model="workflow">
+    	<field name="name">Flujo Ejemplo</field>
+    	<field name="osv">course.example</field>
+    	<field name="on_create">True</field>
+    </record>
+    
+    <!-- 
+    =============
+    /ACTIVIDADES/
+    =============
+    -->
+    
+    <!-- Se crea una fila workvlow.activity en la BD -->
+    <record id="act_draft_example" model="workflow.activity">
+    	<field name="wkf_id" ref="example_wkf"/>
+    	<field name="name">draft</field>
+    	<field name="flow_start">True</field>
+    	<field name="kind">function</field>
+	<!-- Codigo python  -->
+    	<field name="action">write({'state':'draft'})</field>
+    </record>
+    
+    <record id="act_aprove_example" model="workflow.activity">
+    	<field name="wkf_id" ref="example_wkf"/>
+    	<field name="name">aprove</field>
+    	<field name="kind">function</field>
+    	<field name="action">write({'state':'aprove'})</field>
+    </record>
+    
+    
+    <!-- 
+    ==============
+    /TRANSACCIONES/
+    ==============
+    -->
+    
+    <record id="from_draft_to_aprove" model="workflow.transition">
+    	<field name="act_from" ref="act_draft_example"/>
+    	<field name="act_to" ref="act_aprove_example"/>
+    	<field name="signal">aprove</field>
+    </record>
+    
+    <record id="from_aprove_to_draft" model="workflow.transition">
+    	<field name="act_from" ref="act_aprove_example"/>
+    	<field name="act_to" ref="act_draft_example"/>
+    	<field name="signal">previos_state</field>
+    </record>
+    
+    </data>
+</openerp>

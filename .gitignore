@@ -1,3 +1,7 @@
+curso_code/.bzr/
+curso_code_2/.bzr/
+curso_workflow/.bzr/
+*#
 *.py[cod]
 
 # C extensions

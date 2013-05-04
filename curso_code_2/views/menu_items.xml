@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+
+		<!-- menu <menuitem name="Preguntas Evaluacion" parent="capacitacion.menu_administrables" 
+			id="preguntas_eval" sequence="3" action="action_capacitacion_preguntas" groups="capacitacion.group_capacitacion_jefe,capacitacion.group_capacitacion_director,capacitacion.group_capacitacion_talento" 
+			/ -->
+
+		<menuitem name="Modulo de Cursos" id="item_curso" sequence="1" />
+
+		<menuitem parent="item_curso" id="item_curso_profesor"
+			sequence="3" action="action_curso_profesor" />
+			
+		<menuitem parent="item_curso" id="item_alumno"
+			sequence="3" action="action_alumno" />
+		
+		<menuitem parent="item_curso" id="item_materia"
+			sequence="4" action="action_materia" />
+			
+
+		<!-- <menuitem parent="evaluaciones" id="eficacia_evaluacion" sequence="3" 
+			action="action_capacitacion_eficacia" groups="capacitacion.group_capacitacion_jefe,capacitacion.group_capacitacion_director,capacitacion.group_capacitacion_talento,capacitacion.group_capacitacion_empleado" 
+			/> <menuitem parent="evaluaciones" id="eficacia_jefe_evaluacion" sequence="4" 
+			action="action_capacitacion_eficacia_view3" groups="capacitacion.group_capacitacion_jefe" 
+			/> <menuitem parent="evaluaciones" id="evaluados" sequence="4" action="action_capacitacion_eficacia_view4" 
+			groups="capacitacion.group_capacitacion_jefe,capacitacion.group_capacitacion_director,capacitacion.group_capacitacion_talento,capacitacion.group_capacitacion_empleado" 
+			/> -->
+
+	</data>
+</openerp> 

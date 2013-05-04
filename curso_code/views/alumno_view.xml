@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+	
+	    <!-- Alumno Form View -->
+		<record model="ir.ui.view" id="view_alumno_form">
+			<field name="name">view.alumno.form</field>
+			<field name="model">curso.alumno</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Alumno">
+				    <!--field name="profesor_id" colspan="4" /-->
+				        <field name="name" />
+					<field name="cedula" />
+					<field name="edad" />
+					<newline/>
+					<notebook colspan="4">
+						<page string="Materias">
+							<separator string="Materias" colspan="4"/>
+							<field name="materia_ids" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+	
+	
+		<!-- Alumno Tree View -->
+		<record model="ir.ui.view" id="view_alumno_tree">
+			<field name="name">view.alumno.tree</field>
+			<field name="model">curso.alumno</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Alumno">
+				    <!--field name="profesor_id" colspan="4" /-->
+					<field name="name" />
+					<field name="cedula" />
+					<field name="edad" />
+					<field name="num_creditos"/>
+				</tree>
+			</field>
+		</record>
+		
+		
+		<record id="view_alumno_search" model="ir.ui.view">
+            <field name="name">curso.alumno.search</field>
+            <field name="model">curso.alumno</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Alumno">
+                    <field name="name"/>
+                    <field name="cedula"/>
+                </search>
+            </field>
+        </record>
+		
+		<record id="action_alumno" model="ir.actions.act_window">
+			<field name="name">Admin. Alumno</field>
+			<field name="res_model">curso.alumno</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	
+	
+	
+	
+	
+	
+	
+	
+    </data>
+</openerp>
+	

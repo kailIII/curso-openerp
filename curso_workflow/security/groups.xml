@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+		
+		<!-- USUARIOS MODULO CURSO -->
+		<record id="user_workflow" model="res.groups">
+			<field name="name"> WORKFLOW / Usuario_Workflow</field>
+		</record> 
+		
+		<record id="user_wizard" model="res.groups">
+			<field name="name"> WIZARD / Usuario_Wizard</field>
+		</record>   
+    </data>
+</openerp>

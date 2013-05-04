@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_course_example_user","course.example.user","model_course_example","user_workflow",1,1,1,1
+"access_curso_alumno_user","curso.alumno.user","curso.model_curso_alumno","user_workflow",1,1,1,1
+"acces_curso_profesor_user","curso.profesor.user","curso.model_curso_profesor","user_workflow",1,1,1,1
+"acces_curso_example_user_wizard","curso.example.user.wizard","model_course_example","user_wizard",1,0,0,0

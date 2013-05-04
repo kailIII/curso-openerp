@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+	
+	    <!-- Materia Form View -->
+		<record model="ir.ui.view" id="view_materia_form">
+			<field name="name">view.materia.form</field>
+			<field name="model">curso.materia</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Materia">
+					<field name="name" colspan="4"/>
+					<field name="horas"/>
+					<field name="creditos" />
+					<notebook colspan="4">
+						<page string="Notas">
+							<separator string="Notas"/>
+							<field name="descripcion" colspan="4" nolabel="1"/>
+						</page>
+					</notebook>
+				</form>
+			</field>
+		</record>
+	
+	
+		<!-- Materia Tree View -->
+		<record model="ir.ui.view" id="view_materia_tree">
+			<!-- Buena practica el name es el id pero con puntos -->
+			
+			<field name="name">view.materia.tree</field>
+			<field name="model">curso.materia</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Materia">
+					<field name="name" />
+					<field name="horas" />
+					<field name="creditos" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Materia action -->
+		<record id="action_materia" model="ir.actions.act_window">
+			<field name="name">Admin.Materia</field>
+			<field name="res_model">curso.materia</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>				
+    </data>
+</openerp>
+	

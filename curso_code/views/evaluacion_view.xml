@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    
+        <!-- Evaluacion Form View -->
+
+	<record model="ir.ui.view" id="view_evaluacion_form">
+        <field name="name">capacitacion.evaluacion.form</field>
+        <field name="model">capacitacion.evaluacion</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+        <form string="Evaluacion">
+				<field name="solicitud_id" on_change="onchange_evaluacion(solicitud_id)"/>
+				<field name="fecha_evento" />
+				<field name="nombre_instructor" colspan="4" required="1" />
+				<field name="lugar" colspan="4" required="1" string="Departamento" />
+				<separator string="Detalle del Curso / Seminario."/>
+	        	<group col="4" colspan="4"> 	        	
+	        	    <field name="curso" />
+					<field name="horario" />
+					<field name="empresa" />
+					<field name="registrado_por" />
+					<field name="jefe_inmediato" />			
+            	</group>
+            	<group colspan="4"> 
+					<separator colspan="2" string="Criterios Eficacia: 5=Excelente | 4=Muy Bueno | 3=Bueno | 2=Regular | 1=Malo | 0=No Aplica"/>
+					<button name="cargar_evaluacion_curso" states="draft" string="Cargar Evaluacion Curso" type="object" />
+					<button name="cargar_evaluacion_eficacia" states="active" string="Cargar Eficacia Curso" type="object" />
+					<button name="cargar_evaluacion_eficacia_jefe" states="eval_jefe" string="Cargar Eficacia Curso" type="object" groups="capacitacion.group_capacitacion_jefe"/>			
+            	</group>
+         		<notebook colspan="4">
+					<page string="Evaluacion del Curso">
+						<field name="evaluacion_curso_detalle_ids" colspan="4" nolabel="1" attrs="{'readonly':[('state','not in',['draft'])]}">
+						       <tree string="Evaluacion Curso" editable="bottom" >
+						            <field name="agrupado" />
+									<field name="preguntas_id" />
+									<field name="puntaje" />
+								</tree>
+						</field>
+						<group colspan="4">
+				    		<separator col="4" colspan="4" string="Recomendaciones, Comentarios y Sugerencias"/>
+				    		<field name="reco_com_sug_eval" nolabel="1" colspan="4" attrs="{'readonly':[('state','not in',['draft'])]}"/>
+						</group>
+					</page>
+					<page string="Evaluacion de la Eficacia" attrs="{'invisible':[('state','in',['draft'])]}">     
+						<field name="evaluacion_eficacia_detalle_ids" colspan="4" nolabel="1" attrs="{'readonly':[('state','not in',['active'])]}">
+							<tree string="Evaluacion de la Eficacia" editable="bottom">
+									<field name="preguntas_id" />
+									<field name="puntaje" />
+							</tree>
+						</field>
+						<group colspan="4">
+				    		<separator col="4" colspan="4" string="Recomendaciones, Comentarios y Sugerencias"/>
+				    		<field name="reco_com_sug_efi" nolabel="1" colspan="4" attrs="{'readonly':[('state','not in',['active'])]}"/>
+						</group>
+					</page>
+					
+					<page string="Evaluacion de la Eficacia Jefe" attrs="{'invisible':[('state','in',['draft','active'])]}" groups="capacitacion.group_capacitacion_jefe">     
+						<field name="evaluacion_eficacia_jefe_ids" nolabel="1" colspan="4" attrs="{'readonly':[('state','not in',['eval_jefe'])]}">
+							<tree string="Evaluacion de la Eficacia Jefe" editable="bottom">
+									<field name="preguntas_id" />
+									<field name="puntaje" />
+							</tree>
+						</field>
+						<group colspan="4">
+				    		<separator col="4" colspan="4" string="Recomendaciones, Comentarios y Sugerencias"/>
+				    		<field name="reco_com_sug_efi_jef" nolabel="1" colspan="4" attrs="{'readonly':[('state','not in',['eval_jefe'])]}"/>
+						</group>
+					</page>
+					
+				</notebook>
+				<group col="6" colspan="4">
+					 <field name="state"  readonly="1" colspan="2"/>
+					 <group colspan="2">
+					 		<button name="%(action_eval_curso_wizard)d" states="draft,active,eval_jefe,evaluado" string="Imprimir Eva. Curso" type="action" />
+							<button name="%(action_eval_eficacia_wizard)d" states="evaluado" string="Imprimir Eva. Eficacia" type="action" />
+							<button name="evaluacion_curso" states="draft" string="Evaluacion Curso" type="object" confirm="Esta seguro de la Evaluacion del Curso?"/>
+							<button name="evaluacion_eficacia" states="active" string="Evaluacion Eficacia" type="object" confirm="Esta seguro de la Eficacia del Curso?"/>
+							<button name="evaluacion_eficacia_jefe" states="eval_jefe" string="Evaluado" type="object" groups="capacitacion.group_capacitacion_jefe" confirm="Esta seguro de la Eficacia del Curso?"/>
+		             </group>		 
+				</group>
+        </form>
+        </field>
+    </record>
+    
+    
+    <record model="ir.ui.view" id="view_evaluacion_tree">
+        <field name="name">capacitacion.evaluacion.tree</field>
+        <field name="model">capacitacion.evaluacion</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+        <tree string="Evaluacion Capacitacion">
+			<field name="state" />
+			<field name="solicitud_id" />
+            <field name="fecha_evento" />
+            <field name="lugar" />
+			<field name="empresa" />
+        </tree>
+        </field>
+    </record>
+    
+    <record id="action_capacitacion_evaluacion" model="ir.actions.act_window">
+			<field name="name">Evaluacion de la Capacitacion</field>
+			<field name="res_model">capacitacion.evaluacion</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[("state","=","draft"),('reg_user_id','=',uid)]</field>
+	</record>
+
+
+	<record id="action_capacitacion_evaluacion_view1" model="ir.actions.act_window.view">
+			<field eval="1" name="sequence" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_evaluacion_tree" />
+			<field name="act_window_id" ref="action_capacitacion_evaluacion" />
+	</record>
+
+	<record id="action_capacitacion_evaluacion_view2" model="ir.actions.act_window.view">
+			<field eval="2" name="sequence" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_evaluacion_form" />
+			<field name="act_window_id" ref="action_capacitacion_evaluacion" />
+	</record>
+    
+    <record id="action_capacitacion_eficacia" model="ir.actions.act_window">
+			<field name="name">Evaluacion de la Eficacia</field>
+			<field name="res_model">capacitacion.evaluacion</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[("state","=","active")]</field>
+	</record>
+
+
+	<record id="action_capacitacion_eficacia_view1" model="ir.actions.act_window.view">
+			<field eval="1" name="sequence" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_evaluacion_tree" />
+			<field name="act_window_id" ref="action_capacitacion_eficacia" />
+	</record>
+
+	<record id="action_capacitacion_eficacia_view2" model="ir.actions.act_window.view">
+			<field eval="2" name="sequence" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_evaluacion_form" />
+			<field name="act_window_id" ref="action_capacitacion_eficacia" />
+	</record>
+    
+    <record id="action_capacitacion_eficacia_view3" model="ir.actions.act_window">
+			<field name="name">Eval. Eficacia Jefe</field>
+			<field name="res_model">capacitacion.evaluacion</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[("state","=","eval_jefe"),('jefe_id','=',uid)]</field>
+	</record>
+
+	<record id="action_capacitacion_eficacia_jefe_view1" model="ir.actions.act_window.view">
+			<field eval="1" name="sequence" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_evaluacion_tree" />
+			<field name="act_window_id" ref="action_capacitacion_eficacia_view3" />
+	</record>
+
+	<record id="action_capacitacion_eficacia_jefe_view2" model="ir.actions.act_window.view">
+			<field eval="2" name="sequence" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_evaluacion_form" />
+			<field name="act_window_id" ref="action_capacitacion_eficacia_view3" />
+	</record>
+    
+    <record id="action_capacitacion_eficacia_view4" model="ir.actions.act_window">
+			<field name="name">Evaluaciones</field>
+			<field name="res_model">capacitacion.evaluacion</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[("state","=","evaluado")]</field>
+	</record>
+
+	<record id="action_capacitacion_evaluado_view1" model="ir.actions.act_window.view">
+			<field eval="1" name="sequence" />
+			<field name="view_mode">tree</field>
+			<field name="view_id" ref="view_evaluacion_tree" />
+			<field name="act_window_id" ref="action_capacitacion_eficacia_view4" />
+	</record>
+
+	<record id="action_capacitacion_evaluado_view2" model="ir.actions.act_window.view">
+			<field eval="2" name="sequence" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_evaluacion_form" />
+			<field name="act_window_id" ref="action_capacitacion_eficacia_view4" />
+	</record>
+                
+    </data>
+</openerp>    

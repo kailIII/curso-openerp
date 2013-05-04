@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	<record id="curso_ejemplo_tree" model="ir.ui.view">
+    		<field name="name">curso.ejemplo.tree</field>
+    		<field name="model">course.example</field>
+    		<field name="type">tree</field>
+    		<field name="arch" type="xml">
+    			<tree string="Curso">
+    				<field name="name"/>
+    				<field name="description"/>
+    			</tree>
+    		</field>
+    	</record>
+    	
+    	<record id="curso_ejemplo_form" model="ir.ui.view">
+    		<field name="name">curso.ejemplo.form</field>
+    		<field name="model">course.example</field>
+    		<field name="type">form</field>
+    		<field name="arch" type="xml">
+    			<form string="Curso">
+    				<group colspan="4" col="2">
+	    				<field name="name" required="1"/>
+	    				<field name="description"/>
+	    				<field name="student"/>
+	    				<field name="teacher"/>
+    				</group>
+    				<group colspan="4" col="5">
+    					<field name="state"/>
+    					<button name="previos_state" states="aprove" string="Regresar" icon="gtk-ok"/>
+    					<button name="aprove" states="draft" string="Avanzar" icon="gtk-apply"/>
+    				</group>
+    			</form>
+    		</field>
+    	</record>
+    	
+    	<record id="action_ejemplo_curso" model="ir.actions.act_window">
+    		<field name="name">Ejemplo Curso Workflow</field>
+    		<field name="res_model">course.example</field>
+    		<field name="view_type">form</field>
+    		<field name="view_mode">tree,form</field>
+    		<field name="view_id" ref="curso_ejemplo_tree"/>
+    	</record>
+    
+    </data>
+</openerp>

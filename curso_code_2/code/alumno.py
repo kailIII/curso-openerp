@@ -1,0 +1,11 @@
+from osv import osv, fields
+class alumno(osv.osv):
+    _name = 'curso.alumno'
+    _columns = {
+          'name':fields.char('nombre', size=64),
+          'cedula':fields.char('ced', size=10),
+          'edad':fields.integer('Edad'),
+          'curso_id':fields.many2one('curso.curso', 'Curso'),
+          'profesor_id':fields.many2one('curso.profesor', 'Profesor'),
+    }
+alumno()
