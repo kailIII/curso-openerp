@@ -1,0 +1,4 @@
+curso-openerp
+=============
+
+curso-openerp
