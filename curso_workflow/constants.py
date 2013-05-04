@@ -21,6 +21,7 @@
 #
 ##############################################################################
 
+# Estados para el Workflow
 _STATES_CURSO = [
           ('draft','Borrador'),
           ('aprove','Aprobado'),

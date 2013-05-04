@@ -11,6 +11,7 @@
               'security/groups.xml',
               'security/ir.model.access.csv',
               'views/ejemplo_curso.xml',
+              'views/alumno_view.xml',
               'workflow/ejemplo_workflow.xml',
               'views/menuitem.xml',
               

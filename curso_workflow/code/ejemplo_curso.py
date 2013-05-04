@@ -25,6 +25,7 @@ from osv import osv, fields
 from ..constants import _STATES_CURSO
 
 class curso_example(osv.osv):
+    # Es otro objeto del modelo, no es el objeto curso del modulo curso_code
     _name ="course.example"
     _table = "course_example"
     _description = "Tabla de Ejemplos"
@@ -34,6 +35,7 @@ class curso_example(osv.osv):
                 'student':fields.many2one('curso.alumno','Alumno'),
                 'teacher':fields.many2one('curso.profesor','Profesor'),
                 'description':fields.text('Descripción'),
+                # Todos los estados que se pueden manejar en este objeto
                 'state':fields.selection(_STATES_CURSO,string="Estado", readonly=True)
                 }
 
@@ -42,3 +44,10 @@ class curso_example(osv.osv):
                 }
 
 curso_example()
+
+class curso_alumno(osv.osv):
+    _name = 'curso.alumno'
+    _inherit = 'curso.alumno'
+    _columns = {
+        'direccion':fields.char('Direccion', size=64)
+        }
