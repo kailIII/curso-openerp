@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+  <data>
+    
+   <!-- HEREDADO EL ALUMNO AUMENTAR EL CAMPO DIRECCION -->
+    <record model="ir.ui.view" id="alumno_heredado_form">
+      <field name="name">alumno.heredado.form</field>
+      <!-- Los cambios se visualizaran en la vista de alumno del modulo curso_code-->
+      <field name="model">curso.alumno</field>
+      <field name="inherit_id" ref="curso_code.view_alumno_form"/>
+      <field name="arch" type="xml">
+	<data>
+	  <field name="cedula" position="after">
+	    <field name="direccion"/>
+	  </field>
+	</data>
+      </field>
+    </record>
+  </data>
+</openerp>
