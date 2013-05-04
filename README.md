@@ -1,8 +1,8 @@
 curso-openerp
 =============
 
-Codigo de modulos de ejmeplo del Curso de OpenERP
-=================================================
+Codigo de modulos de ejemplo del Curso de OpenERP
+-------------------------------------------------
 
 * <strong>Instructor</strong>: Ing. Vinicio Llumiquinga
 * <strong>Empresa</strong>: AtikaSoft
