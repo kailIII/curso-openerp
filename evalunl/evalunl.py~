@@ -1,0 +1,4 @@
+from osv import osv, fields
+
+class indicador(osv.Model):
+    _name = 'evalunl.indicador'
